@@ -59,7 +59,6 @@ jobs:
         with:
           context: .
           builder: ${{ steps.buildx.outputs.name }}
-          file: Dockerfile
           # Set the desired build target here
           target: deploy
           push: false
