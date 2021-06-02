@@ -1,4 +1,4 @@
-FROM ruby:2.7.1 AS builder
+FROM ruby:2.7.0 AS builder
 ENV LANG C.UTF-8
 ENV RAILS_ENV production
 ENV MYSQL_DB_ADAPTER nulldb
