@@ -37,7 +37,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 
 FROM madnight/docker-alpine-wkhtmltopdf as wkhtmltopdf
 
-FROM ruby:2.7.1 as deploy
+FROM ruby:2.7.0 as deploy
 LABEL maintainer="lixiumiao@gmail.com"
 ENV RAILS_ENV production
 ENV LANG C.UTF-8
