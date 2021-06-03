@@ -69,17 +69,17 @@ jobs:
             ${{ steps.prep.outputs.tagged_image }}
             coolhu/test_action:latest
 
-          cache-from: type=local,src=/tmp/.buildx-cache
+          # cache-from: type=local,src=/tmp/.buildx-cache
           # Note the mode=max here
           # More: https://github.com/moby/buildkit#--export-cache-options
           # And: https://github.com/docker/buildx#--cache-tonametypetypekeyvalue
-          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+          # cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
           build-args: RAILS_MASTER_KEY=c6ea265a6c0c6ce58bc51a6870565ec7
 
       - name: Move cache
         run: |
           echo "1234444444"
-          cd /tmp/.buildx-cache
+          cd /tmp/.buildx-cache/ingest
           ls
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
