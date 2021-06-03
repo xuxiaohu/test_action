@@ -85,7 +85,7 @@ jobs:
       - name: Move cache
         run: |
           echo "1234444444"
-          cd /tmp/.buildx-cache/ingest
+          cd /tmp/.buildx-cache-new
           ls
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
