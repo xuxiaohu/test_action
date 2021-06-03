@@ -69,7 +69,7 @@ jobs:
           # More: https://github.com/moby/buildkit#--export-cache-options
           # And: https://github.com/docker/buildx#--cache-tonametypetypekeyvalue
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
-          build-args: SECRET_KEY_BASE=test
+          build-args: SECRET_KEY_BASE=test,RAILS_MASTER_KEY=test
 
       - name: Move cache
         run: |
