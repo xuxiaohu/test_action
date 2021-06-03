@@ -40,7 +40,7 @@ jobs:
         # uses: docker/setup-buildx-action@master
         # with:
         #   install: true
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@master
         with:
           install: true
           version: latest
@@ -52,7 +52,7 @@ jobs:
         with:
           path: /tmp/.buildx-cache
           # Key is named differently to avoid collision
-          key: ${{ runner.os }}-xxh-multi-buildx-123456qwersd2
+          key: ${{ runner.os }}-xxh-multi-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-xxh-multi-buildx
 
