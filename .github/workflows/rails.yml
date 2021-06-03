@@ -52,7 +52,7 @@ jobs:
         with:
           path: /tmp/.buildx-cache
           # Key is named differently to avoid collision
-          key: ${{ runner.os }}-xxh-multi-buildx-${{ github.sha }}
+          key: ${{ runner.os }}-xxh-multi-buildx-123456qwersd2
           restore-keys: |
             ${{ runner.os }}-xxh-multi-buildx
 
