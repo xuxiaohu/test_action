@@ -4,6 +4,10 @@ ENV RAILS_ENV production
 ENV MYSQL_DB_ADAPTER nulldb
 ARG YARN_VERSION=1.13.0
 
+# Add Yarn to the sources list
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
+
 RUN apt-get update && \
     apt-get install -y nodejs \
                        yarn=$YARN_VERSION-1 \
@@ -50,6 +54,10 @@ ENV RAILS_LOG_TO_STDOUT true
 ENV RAILS_SERVE_STATIC_FILES true
 ARG YARN_VERSION=1.13.0
 
+# Add Yarn to the sources list
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
+  
 RUN apt-get update && \
     apt-get install -y nodejs \
                        yarn=$YARN_VERSION-1 \
