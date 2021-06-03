@@ -5,6 +5,7 @@ ENV MYSQL_DB_ADAPTER nulldb
 
 RUN apt-get update && \
     apt-get install -y nodejs \
+                       yarn \
                        vim \
                        default-mysql-client \
                        default-libmysqlclient-dev \
@@ -49,6 +50,7 @@ ENV RAILS_SERVE_STATIC_FILES true
 
 RUN apt-get update && \
     apt-get install -y nodejs \
+                       yarn \
                        vim \
                        default-mysql-client \
                        default-libmysqlclient-dev \
