@@ -15,8 +15,6 @@ RUN apt-get update && \
 
 #Cache bundle install
 WORKDIR /tmp
-RUN  echo "------"
-RUN  echo $RAILS_MASTER_KEY
 ADD ./Gemfile Gemfile
 ADD ./Gemfile.lock Gemfile.lock
 RUN gem install bundler:2.0.1
@@ -30,7 +28,7 @@ COPY env $APP_ROOT/.env
 RUN mkdir -p $APP_ROOT/tmp/pids
 
 WORKDIR $APP_ROOT
-ENV RAILS_MASTER_KEY=$RAILS_MASTER_KEY
+ARG RAILS_MASTER_KEY=1
 RUN SKIP_APP_CACHE=true bundle exec rake assets:precompile
 
 VOLUME ["$APP_ROOT/public"]
