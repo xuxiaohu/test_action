@@ -24,18 +24,10 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          IMAGE_ID=coolhu/$IMAGE_NAME
-          # Change all uppercase to lowercase
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          # Strip git ref prefix from version
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-          # Strip "v" prefix from tag name
-          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
-          # Use Docker `latest` tag convention
-          [ "$VERSION" == "master" ] && VERSION=latest
-          IMAGE="test_action/$IMAGE_ID"
-          echo ::set-output name=tagged_image::${IMAGE}:${VERSION}
-          echo ::set-output name=tag::${VERSION}
+          TAG=$(echo $GITHUB_SHA | head -c7)
+          IMAGE="coolhu/test_action"
+          echo ::set-output name=tagged_image::${IMAGE}:${TAG}
+          echo ::set-output name=tag::${TAG}
       - name: Set up Docker Buildx
         id: buildx
         # Use the action from the master, as we've seen some inconsistencies with @v1
@@ -69,7 +61,10 @@ jobs:
           # Set the desired build target here
           target: deploy
           push: true
-          tags: ${{ steps.prep.outputs.tagged_image }}
+          tags: |
+            ${{ steps.prep.outputs.tagged_image }}
+            coolhu/test_action:latest
+
           cache-from: type=local,src=/tmp/.buildx-cache
           # Note the mode=max here
           # More: https://github.com/moby/buildkit#--export-cache-options
