@@ -2,10 +2,11 @@ FROM ruby:2.7.0 AS builder
 ENV LANG C.UTF-8
 ENV RAILS_ENV production
 ENV MYSQL_DB_ADAPTER nulldb
+ARG YARN_VERSION=1.13.0
 
 RUN apt-get update && \
     apt-get install -y nodejs \
-                       yarn \
+                       yarn=$YARN_VERSION-1 \
                        vim \
                        default-mysql-client \
                        default-libmysqlclient-dev \
@@ -47,10 +48,11 @@ ENV LANG C.UTF-8
 ENV APP_ROOT /app
 ENV RAILS_LOG_TO_STDOUT true
 ENV RAILS_SERVE_STATIC_FILES true
+ARG YARN_VERSION=1.13.0
 
 RUN apt-get update && \
     apt-get install -y nodejs \
-                       yarn \
+                       yarn=$YARN_VERSION-1 \
                        vim \
                        default-mysql-client \
                        default-libmysqlclient-dev \
