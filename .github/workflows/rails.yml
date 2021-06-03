@@ -71,7 +71,7 @@ jobs:
           file: ./Dockerfile
           # Set the desired build target here
           target: deploy
-          push: false
+          push: true
           tags: |
             ${{ steps.prep.outputs.tagged_image }}
             coolhu/test_action:latest
