@@ -24,9 +24,14 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          TAG=$(echo $GITHUB_SHA | head -c7)
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "master" ] && VERSION=latest
           IMAGE="coolhu/test_action"
-          echo ::set-output name=tagged_image::${IMAGE}:${TAG}
+          echo ::set-output name=tagged_image::${IMAGE}:${VERSION}
           echo ::set-output name=tag::${TAG}
       - name: Set up Docker Buildx
         id: buildx
