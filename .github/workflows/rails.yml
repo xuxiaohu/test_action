@@ -95,8 +95,8 @@ jobs:
           cache-to: type=registry,mode=max,ref=coolhu/test_action:buildcache
           build-args: RAILS_MASTER_KEY=c6ea265a6c0c6ce58bc51a6870565ec7
 
-      - name: Move cache
-        run: |
-          docker images --digests
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+      # - name: Move cache
+      #   run: |
+      #     docker images --digests
+      #     rm -rf /tmp/.buildx-cache
+      #     mv /tmp/.buildx-cache-new /tmp/.buildx-cache
