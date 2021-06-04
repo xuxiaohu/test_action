@@ -98,9 +98,5 @@ jobs:
       - name: Move cache
         run: |
           docker images --digests
-          echo "1234444444"
-          cd /tmp/.buildx-cache-new
-          ls
-          cat /tmp/.buildx-cache-new/index.json
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
