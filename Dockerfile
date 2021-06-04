@@ -30,12 +30,11 @@ ARG RAILS_MASTER_KEY=1
 # Install yarn packages
 COPY package.json yarn.lock /app/
 RUN yarn install
-ADD ./Rakefile Rakefile
-RUN SKIP_APP_CACHE=true bundle exec rake assets:precompile
 
 COPY . $APP_ROOT
 COPY env $APP_ROOT/.env
 RUN mkdir -p $APP_ROOT/tmp/pids
+RUN SKIP_APP_CACHE=true bundle exec rake assets:precompile
 
 FROM madnight/docker-alpine-wkhtmltopdf as wkhtmltopdf
 
