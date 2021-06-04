@@ -97,7 +97,7 @@ jobs:
 
       - name: Move cache
         run: |
-          docker ps
+          docker images
           echo "1234444444"
           cd /tmp/.buildx-cache-new
           ls
