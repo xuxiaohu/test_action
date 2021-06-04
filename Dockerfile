@@ -19,24 +19,17 @@ RUN apt-get update && \
 
 # RUN rm /usr/lib/x86_64-linux-gnu/libssl.so && ln -nfs /usr/lib/x86_64-linux-gnu/libssl.so.1.0.2 /usr/lib/x86_64-linux-gnu/libssl.so
 
-#Cache bundle install
-WORKDIR /tmp
+ENV APP_ROOT /app
+RUN mkdir -p $APP_ROOT
+WORKDIR $APP_ROOT
 ADD ./Gemfile Gemfile
 ADD ./Gemfile.lock Gemfile.lock
 RUN gem install bundler:2.0.1
 RUN bundle install
-
-ENV APP_ROOT /app
-RUN mkdir -p $APP_ROOT
-WORKDIR $APP_ROOT
-
-WORKDIR $APP_ROOT
 ARG RAILS_MASTER_KEY=1
 # Install yarn packages
 COPY package.json yarn.lock /app/
 RUN yarn install
-ADD ./Gemfile Gemfile
-ADD ./Gemfile.lock Gemfile.lock
 RUN SKIP_APP_CACHE=true bundle exec rake assets:precompile
 
 COPY . $APP_ROOT
