@@ -82,7 +82,8 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           file: ./Dockerfile
           # Set the desired build target here
-          target: builder
+          target: deploy
+          load: true
           push: true
           tags: |
             ${{ steps.prep.outputs.tagged_image }}
