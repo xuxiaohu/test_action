@@ -33,6 +33,18 @@ jobs:
           IMAGE="coolhu/test_action"
           echo ::set-output name=tagged_image::${IMAGE}:${VERSION}
           echo ::set-output name=tag::${TAG}
+      # - name: Build base image
+      #   id: docker_build_base
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: .
+      #     file: Dockerfile
+      #     push: false
+      #     load: false
+      #     cache-from: type=local,src=/tmp/.buildx-cache
+      #     cache-to: type=local,mode=max,dest=/tmp/.buildx-cache
+      #     target: builder
+
       - name: Set up Docker Buildx
         id: buildx
         # Use the action from the master, as we've seen some inconsistencies with @v1
@@ -49,7 +61,7 @@ jobs:
         with:
           path: /tmp/.buildx-cache
           # Key is named differently to avoid collision
-          key: ${{ runner.os }}-xxh-multi-buildx-${{ github.sha }}
+          key: ${{ runner.os }}-xxh-multi-buildx-${{ hashFiles('Dockerfile') }}
           restore-keys: |
             ${{ runner.os }}-xxh-multi-buildx
       
