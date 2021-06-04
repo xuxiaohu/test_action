@@ -35,6 +35,8 @@ ARG RAILS_MASTER_KEY=1
 # Install yarn packages
 COPY package.json yarn.lock /app/
 RUN yarn install
+ADD ./Gemfile Gemfile
+ADD ./Gemfile.lock Gemfile.lock
 RUN SKIP_APP_CACHE=true bundle exec rake assets:precompile
 
 COPY . $APP_ROOT
