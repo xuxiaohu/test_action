@@ -29,18 +29,17 @@ RUN bundle install
 ENV APP_ROOT /app
 RUN mkdir -p $APP_ROOT
 WORKDIR $APP_ROOT
-COPY . $APP_ROOT
-COPY env $APP_ROOT/.env
-RUN mkdir -p $APP_ROOT/tmp/pids
 
 WORKDIR $APP_ROOT
 ARG RAILS_MASTER_KEY=1
+# Install yarn packages
+COPY package.json yarn.lock /app/
+RUN yarn install
 RUN SKIP_APP_CACHE=true bundle exec rake assets:precompile
 
-VOLUME ["$APP_ROOT/public"]
-
-EXPOSE  3000
-CMD ["rails", "server", "-b", "0.0.0.0"]
+COPY . $APP_ROOT
+COPY env $APP_ROOT/.env
+RUN mkdir -p $APP_ROOT/tmp/pids
 
 FROM madnight/docker-alpine-wkhtmltopdf as wkhtmltopdf
 
