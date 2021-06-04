@@ -88,11 +88,11 @@ jobs:
             ${{ steps.prep.outputs.tagged_image }}
             coolhu/test_action:latest
 
-          cache-from: type=registry,ref=coolhu/test_action:buildcache
+          cache-from: type=registry,ref=coolhu/uni-private:buildcache
           # Note the mode=max here
           # More: https://github.com/moby/buildkit#--export-cache-options
           # And: https://github.com/docker/buildx#--cache-tonametypetypekeyvalue
-          cache-to: type=registry,mode=max,ref=coolhu/test_action:buildcache
+          cache-to: type=registry,mode=max,ref=coolhu/uni-private:buildcache
           build-args: RAILS_MASTER_KEY=c6ea265a6c0c6ce58bc51a6870565ec7
 
       # - name: Move cache
