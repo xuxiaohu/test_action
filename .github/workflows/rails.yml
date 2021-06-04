@@ -82,7 +82,7 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           file: ./Dockerfile
           # Set the desired build target here
-          target: deploy
+          target: builder
           push: true
           tags: |
             ${{ steps.prep.outputs.tagged_image }}
@@ -97,7 +97,7 @@ jobs:
 
       - name: Move cache
         run: |
-          docker images
+          docker images --digests
           echo "1234444444"
           cd /tmp/.buildx-cache-new
           ls
