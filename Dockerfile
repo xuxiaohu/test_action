@@ -35,12 +35,7 @@ COPY env $APP_ROOT/.env
 RUN mkdir -p $APP_ROOT/tmp/pids
 # Only add files that affect the assets:precompile task
 ADD Rakefile                                /app/Rakefile
-ADD config/application.rb                   /app/config/application.rb
-ADD config/boot.rb                          /app/config/boot.rb
-ADD config/environment.rb                   /app/config/environment.rb
-ADD config/environments/production.rb       /app/config/environments/production.rb
-ADD config/initializers                     /app/config/initializers
-ADD config/locales                          /app/config/locales
+ADD config                 /app/config
 ADD app/assets                              /app/app/assets
 ADD lib/assets                              /app/lib/assets
 RUN SKIP_APP_CACHE=true bundle exec rake assets:precompile
