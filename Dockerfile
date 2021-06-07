@@ -43,7 +43,6 @@ ADD config/initializers                     /app/config/initializers
 ADD config/locales                          /app/config/locales
 ADD app/assets                              /app/app/assets
 ADD lib/assets                              /app/lib/assets
-ADD vendor/assets                           /app/vendor/assets
 RUN SKIP_APP_CACHE=true bundle exec rake assets:precompile
 
 FROM madnight/docker-alpine-wkhtmltopdf as wkhtmltopdf
