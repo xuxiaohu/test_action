@@ -31,7 +31,6 @@ ARG RAILS_MASTER_KEY=1
 COPY package.json yarn.lock /app/
 RUN yarn install
 
-COPY . $APP_ROOT
 COPY env $APP_ROOT/.env
 RUN mkdir -p $APP_ROOT/tmp/pids
 # Only add files that affect the assets:precompile task
@@ -73,6 +72,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR $APP_ROOT
+ADD . $APP_ROOT
 RUN gem install bundler -v 2.0.1 && gem install rake  -v 12.3.3  
 RUN mkdir -p tmp/pids && mkdir -p log && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" >  /etc/timezone
 COPY --from=wkhtmltopdf /bin/wkhtmltopdf /bin/
